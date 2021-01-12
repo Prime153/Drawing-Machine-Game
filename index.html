@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="./favicon2.png"/>
+    <title>Game</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Coiny&family=Fredoka+One&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="background">
+        <div class="wrapper">
+            <div class="center">
+                <div class="row-1">
+                    <label>
+                        <span class="titles">Podaj zakres liczb</span>
+                        <p><input type="number" class="min" min="0" placeholder="Min"> <span class="titles">do</span> <input type="number" class="max" min="2" name="numbers" placeholder="Max"></p>
+                    </label>
+                </div>
+                <div class="row-2">
+                    <label>
+                        <span class="titles">Podaj liczbę żyć</span>
+                        <p><input type="number" class="lifes-number" min="1" value="1"></p>
+                    </label>
+                </div>
+                <div class="button-area">
+                    <button class="start-button">Start</button>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper2 hidden">
+            <div class="center">
+                <div class="row-1">
+                    <label>
+                        <span class="titles">Została wylosowana liczba z zakresu: <p class="numerical-range"></p></span>
+                    </label>
+                </div>
+                <div class="row-2">
+                    <label>
+                        <span class="titles">Zgadnij liczbę </span>
+                        <p><input type="number" class="players-answer"></p>
+                        <span class="win"></span>
+                    </label>
+                </div>
+                <div class="button-area">
+                    <button class="play-again hidden">Zagrajmy jeszcze raz!</button><button class="check-button">Sprawdź</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script src="confetti.min.js"></script>
+</body>
+</html>
