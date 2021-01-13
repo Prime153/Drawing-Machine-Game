@@ -45,14 +45,14 @@ function checkPlayerAnswer() {
 }
 
 function gameOver() {
-    if (lifesNumber.value == 1) {
+    if (lifesNumber.value == 1 || lifesNumber.value == 0) {
         document.querySelector(".win").innerText = ("Koniec gry :( spróbuj jeszcze raz")
         playAgain()
         
     } else {
         lifesNumber.value--
         alert(
-            `                                                NIE ZGADŁEŚ
+            `NIE ZGADŁEŚ
             
             Pozostało: ${lifesNumber.value} trafień 
             Podpowiedż: ${hint()}`)
