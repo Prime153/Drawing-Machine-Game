@@ -1,6 +1,8 @@
 const minimum = document.querySelector(".min")
 const maximum = document.querySelector(".max")
 const lifesNumber = document.querySelector(".lifes-number")
+const theEnd =  document.querySelector(".win")
+const playersAnswer = document.querySelector(".players-answer")
 
 // Start button event
 document.querySelector(".start-button").addEventListener("click", event => {
@@ -14,11 +16,15 @@ document.querySelector(".check-button").addEventListener("click", event => {
 })
 
 function validation () {
-    if(!minimum.value.indexOf("-") || !maximum.value.indexOf("-") || !lifesNumber.value.indexOf("-")) {
+    const min = parseInt(minimum.value)
+    const max = parseInt(maximum.value)
+    const lifes = parseInt(lifesNumber.value)
+
+    if(min < 0 || max < 0 || lifes < 0) {
         alert("Liczba nie może być ujemna")
-    } else if(minimum.value === "" || maximum.value === "" || lifesNumber.value === ""  ) {
+    } else if( isNaN(min) || isNaN(max) || isNaN(lifes)) {
         alert("Miejsca nie mogą byc puste ani zawierać znaków specialnych i liter")
-    } else if (minimum.value == maximum.value) {
+    } else if (min === max) {
         alert("Liczby są jednkowe")
     } else {
         document.querySelector(".wrapper").classList.add("hidden") 
@@ -28,16 +34,19 @@ function validation () {
 }
 
 function getRandomNumber() {
-    min = Math.ceil(minimum.value);
-    max = Math.floor(maximum.value);
+   const min = Math.ceil(minimum.value);
+   const max = Math.floor(maximum.value);
+
     random =  Math.floor(Math.random() * (max - min + 1) ) + min;
     console.log(random)
 }
 
 function checkPlayerAnswer() {
-    if (document.querySelector(".players-answer").value == random) {
+    const Answer = parseInt(playersAnswer.value)
+
+    if (Answer === random) {
         confetti.start();
-        document.querySelector(".win").innerText = "Gratulacje wygrałeś!"
+        theEnd.innerText = "Gratulacje wygrałeś!"
         playAgain()
    } else {
         gameOver()
@@ -45,22 +54,26 @@ function checkPlayerAnswer() {
 }
 
 function gameOver() {
-    if (lifesNumber.value == 1 || lifesNumber.value == 0) {
-        document.querySelector(".win").innerText = ("Koniec gry :( spróbuj jeszcze raz")
+
+    if (parseInt(lifesNumber.value) === 1 || parseInt(lifesNumber.value) === 0) {
+        theEnd.innerText = ("Koniec gry :( spróbuj jeszcze raz")
         playAgain()
         
     } else {
-        lifesNumber.value--
+        parseInt(lifesNumber.value--)
         alert(
             `NIE ZGADŁEŚ
             
-            Pozostało: ${lifesNumber.value} trafień 
-            Podpowiedż: ${hint()}`)
+            Pozostało: ${parseInt(lifesNumber.value)} trafień 
+            Podpowiedż: ${hint()}`
+            )
     }
 }
 
 function hint() {
-    if(document.querySelector(".players-answer").value < random) {
+    const Answer = parseInt(playersAnswer.value)
+
+    if(Answer < random) {
         return "Podana liczba jest mniejsza od wyslosowanej"
     } else {
         return "Podana liczba jest większa od wylosowanej"
@@ -68,8 +81,9 @@ function hint() {
 }
 
 function playAgain() {
-    check = document.querySelector(".check-button")
-    play = document.querySelector(".play-again")
+    clear()
+   const check = document.querySelector(".check-button")
+   const play = document.querySelector(".play-again")
 
     check.classList.add("hidden")
     play.classList.remove("hidden")
@@ -84,6 +98,17 @@ function playAgain() {
         document.querySelector(".wrapper2").classList.add("hidden") 
     })
 }
+
+function clear() {
+    minimum.value = 0 
+    maximum.value = 2
+    lifesNumber.value = 1
+}
+
+if (window.performance) {
+    clear()
+}
+
  
    
 
