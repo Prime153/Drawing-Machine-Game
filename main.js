@@ -15,7 +15,7 @@ class Validation {
         if(this.arr[0] < 0 || this.arr[1] < 0 || this.arr[2] < 0) {
             alert("Number cannot be negative")
         } else if( this.arr.includes(NaN,undefined)) {
-            alert("Innputs cannot be empty or contain special characters")
+            alert("Inputs cannot be empty or contain special characters")
         } else if (this.arr[0] === this.arr[1]) {
             alert("Numbers are identical")           
         } else {
@@ -90,7 +90,7 @@ class CheckAnswer extends RestartGame {
     checkPlayersAnswer() {
         if (this.playersAnswer === random) {
             confetti.start();
-            endCaption.innerText = "Gratulacje wygrałeś!"
+            endCaption.innerText = "You won"
             super.playAgain()
         } else {
             super.gameOver()
