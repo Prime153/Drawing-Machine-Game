@@ -13,12 +13,11 @@ class Validation {
     }
     checkInput() {
         if(this.arr[0] < 0 || this.arr[1] < 0 || this.arr[2] < 0) {
-            alert("Liczba nie może być ujemna")
+            alert("Number cannot be negative")
         } else if( this.arr.includes(NaN,undefined)) {
-            alert("Miejsca nie mogą byc puste ani zawierać znaków specialnych i liter")
+            alert("Innputs cannot be empty or contain special characters")
         } else if (this.arr[0] === this.arr[1]) {
-            alert("Liczby są jednkowe")
-            
+            alert("Numbers are identical")           
         } else {
             document.querySelector(".wrapper").classList.add("hidden") 
             document.querySelector(".wrapper2").classList.remove("hidden") 
@@ -34,9 +33,9 @@ class Hint  {
     }
     getTip() {
         if(this.playersAnswer < random) {
-            return "Podana liczba jest mniejsza od wyslosowanej"
+            return "Given number is smaller than the drawn one"
         } else {
-            return "Podana liczba jest większa od wylosowanej"
+            return "Given number is greater than the drawn one"
         }
     }
 }
@@ -66,16 +65,16 @@ class RestartGame {
 
     gameOver() {
         if (this.lifes === 1 || this.lifes === 0) {
-            endCaption.innerText = ("Koniec gry :( spróbuj jeszcze raz")
+            endCaption.innerText = ("Game Over :( Try again")
             this.playAgain()
         } else {
             parseInt(lifes.value--)
             const tip = new Hint(playersAnswer)
             alert(
-                `NIE ZGADŁEŚ
+                `YOU DIDN'T GUES
                 
-                Pozostało: ${parseInt(lifes.value)} trafień 
-                Podpowiedź: ${tip.getTip()}
+                Lives left: ${parseInt(lifes.value)} 
+                Tip: ${tip.getTip()}
                 `
             )
         }
