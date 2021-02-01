@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="favicon.png"/>
+    <link rel="icon" type="image/png" href="./favicon.png"/>
     <title>Game</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Coiny&family=Fredoka+One&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="styles.css">
+    <!-- <script defer src="script.js"></script> -->
+    <script defer src="main.js"></script>
+    <script defer src="confetti.min.js"></script>
 </head>
 <body>
     <div class="background">
@@ -16,13 +19,13 @@
                 <div class="row-1">
                     <label>
                         <span class="titles">Podaj zakres liczb</span>
-                        <p><input type="number" class="min" min="0" placeholder="Min"> <span class="titles">do</span> <input type="number" class="max" min="2" name="numbers" placeholder="Max"></p>
+                        <p><input type="number" class="min" min="0" placeholder="Min" value=" "> <span class="titles">do</span> <input type="number" class="max" min="2"  placeholder="Max" value=" "></p>
                     </label>
                 </div>
                 <div class="row-2">
                     <label>
                         <span class="titles">Podaj liczbę żyć</span>
-                        <p><input type="number" class="lifes-number" min="1" value="1"></p>
+                        <p><input type="number" class="lifes-number" min="1" placeholder="Life"></p>
                     </label>
                 </div>
                 <div class="button-area">
@@ -50,7 +53,5 @@
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
-    <script src="confetti.min.js"></script>
 </body>
 </html>
