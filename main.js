@@ -1,6 +1,6 @@
 const min = document.querySelector(".min")
 const max = document.querySelector(".max")
-const lives = document.querySelector(".lives-number")
+const lifes = document.querySelector(".lifes-number")
 const playersAnswer = document.querySelector(".players-answer")
 // End caption
 const endCaption =  document.querySelector(".win")
@@ -9,8 +9,8 @@ const endCaption =  document.querySelector(".win")
 
 class Validation {
     
-    constructor(min, max, lives) {
-        this.arr = [parseInt(min.value), parseInt(max.value), parseInt(lives.value)]
+    constructor(min, max, lifes) {
+        this.arr = [parseInt(min.value), parseInt(max.value), parseInt(lifes.value)]
     }
     checkInput() {
         if(this.arr[0] < 0 || this.arr[1] < 0 || this.arr[2] < 0) {
@@ -43,8 +43,8 @@ class Hint  {
 }
 
 class RestartGame {
-    constructor(lives) {
-        this.lives = parseInt(lives.value)
+    constructor(lifes) {
+        this.lifes = parseInt(lifes.value)
     } 
     playAgain() {
         const check = document.querySelector(".check-button")
@@ -66,16 +66,16 @@ class RestartGame {
     } 
 
     gameOver() {
-        if (this.lives === 1 || this.lives === 0) {
-            endCaption.innerText = ("Koniec gry :( spróbuj jeszcze raz")
+        if (this.lifes === 1 || this.lifes === 0) {
+            endCaption.innerText = ("Game Over :( Try again")
             this.playAgain()
         } else {
-            parseInt(lives.value--)
+            parseInt(lifes.value--)
             const tip = new Hint(playersAnswer)
             alert(
                 ` WRONG NUMBER
                 
-                Lives: ${parseInt(lives.value)}
+                Lifes: ${parseInt(lifes.value)}
                 Tip: ${tip.getTip()}
                 `
             )
@@ -85,14 +85,14 @@ class RestartGame {
 
 
 class CheckAnswer extends RestartGame {
-    constructor(lives, playersAnswer) {
-        super(lives)
+    constructor(lifes, playersAnswer) {
+        super(lifes)
         this.playersAnswer = parseInt(playersAnswer.value)
     }
     checkPlayersAnswer() {
         if (this.playersAnswer === random) {
             confetti.start();
-            endCaption.innerText = "Gratulacje wygrałeś!"
+            endCaption.innerText = "You won!"
             super.playAgain()
         } else {
             super.gameOver()
@@ -104,7 +104,7 @@ class Buttons {
 
     startButton() {
         document.querySelector(".start-button").addEventListener("click", () => {
-            const getInputValue = new Validation(min, max, lives)
+            const getInputValue = new Validation(min, max, lifes)
             
             getInputValue.checkInput()
             getRandomNumber()
@@ -113,7 +113,7 @@ class Buttons {
     }
     checkButton() { 
         document.querySelector(".check-button").addEventListener("click", () => {
-            const check = new CheckAnswer(lives, playersAnswer)
+            const check = new CheckAnswer(lifes, playersAnswer)
 
             check.checkPlayersAnswer()
         })
@@ -125,7 +125,7 @@ class GameInitiation {
     clear() {
         min.value = "" 
         max.value = ""
-        lives.value = ""
+        lifes.value = ""
         playersAnswer.value = ""
     }
     startGame() {
