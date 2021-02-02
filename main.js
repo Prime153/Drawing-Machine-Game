@@ -1,6 +1,6 @@
 const min = document.querySelector(".min")
 const max = document.querySelector(".max")
-const lifes = document.querySelector(".lifes-number")
+const lives = document.querySelector(".lives-number")
 const playersAnswer = document.querySelector(".players-answer")
 // End caption
 const endCaption =  document.querySelector(".win")
@@ -9,16 +9,16 @@ const endCaption =  document.querySelector(".win")
 
 class Validation {
     
-    constructor(min, max, lifes) {
-        this.arr = [parseInt(min.value), parseInt(max.value), parseInt(lifes.value)]
+    constructor(min, max, lives) {
+        this.arr = [parseInt(min.value), parseInt(max.value), parseInt(lives.value)]
     }
     checkInput() {
         if(this.arr[0] < 0 || this.arr[1] < 0 || this.arr[2] < 0) {
-            alert("Liczba nie może być ujemna")
+            alert("Number cannot be negative")
         } else if( this.arr.includes(NaN,undefined)) {
-            alert("Miejsca nie mogą byc puste ani zawierać znaków specialnych i liter")
+            alert("Inputs cannot be empty or include special characters")
         } else if (this.arr[0] === this.arr[1]) {
-            alert("Liczby są jednkowe")
+            alert("Numbers are the same")
             
         } else {
             document.querySelector(".wrapper").classList.add("hidden") 
@@ -43,8 +43,8 @@ class Hint  {
 }
 
 class RestartGame {
-    constructor(lifes) {
-        this.lifes = parseInt(lifes.value)
+    constructor(lives) {
+        this.lives = parseInt(lives.value)
     } 
     playAgain() {
         const check = document.querySelector(".check-button")
@@ -66,17 +66,17 @@ class RestartGame {
     } 
 
     gameOver() {
-        if (this.lifes === 1 || this.lifes === 0) {
+        if (this.lives === 1 || this.lives === 0) {
             endCaption.innerText = ("Koniec gry :( spróbuj jeszcze raz")
             this.playAgain()
         } else {
-            parseInt(lifes.value--)
+            parseInt(lives.value--)
             const tip = new Hint(playersAnswer)
             alert(
-                `NIE ZGADŁEŚ
+                ` WRONG NUMBER
                 
-                Pozostało: ${parseInt(lifes.value)} trafień 
-                Podpowiedź: ${tip.getTip()}
+                Lives: ${parseInt(lives.value)}
+                Tip: ${tip.getTip()}
                 `
             )
         }
@@ -85,8 +85,8 @@ class RestartGame {
 
 
 class CheckAnswer extends RestartGame {
-    constructor(lifes, playersAnswer) {
-        super(lifes)
+    constructor(lives, playersAnswer) {
+        super(lives)
         this.playersAnswer = parseInt(playersAnswer.value)
     }
     checkPlayersAnswer() {
@@ -104,7 +104,7 @@ class Buttons {
 
     startButton() {
         document.querySelector(".start-button").addEventListener("click", () => {
-            const getInputValue = new Validation(min, max, lifes)
+            const getInputValue = new Validation(min, max, lives)
             
             getInputValue.checkInput()
             getRandomNumber()
@@ -113,7 +113,7 @@ class Buttons {
     }
     checkButton() { 
         document.querySelector(".check-button").addEventListener("click", () => {
-            const check = new CheckAnswer(lifes, playersAnswer)
+            const check = new CheckAnswer(lives, playersAnswer)
 
             check.checkPlayersAnswer()
         })
@@ -125,7 +125,7 @@ class GameInitiation {
     clear() {
         min.value = "" 
         max.value = ""
-        lifes.value = ""
+        lives.value = ""
         playersAnswer.value = ""
     }
     startGame() {
