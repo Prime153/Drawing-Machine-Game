@@ -35,9 +35,9 @@ class Hint  {
     }
     getTip() {
         if(this.playersAnswer < random) {
-            return "Podana liczba jest mniejsza od wyslosowanej"
+            return "Given number is smaller than the drawn one"
         } else {
-            return "Podana liczba jest większa od wylosowanej"
+            return "Given number is greater than the drawn one"
         }
     }
 }
