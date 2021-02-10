@@ -1,11 +1,11 @@
-const min = document.querySelector(".min")
-const max = document.querySelector(".max")
-const lifes = document.querySelector(".lifes-number")
-const playersAnswer = document.querySelector(".players-answer")
+const $ = selector => document.querySelector(selector)
+
+const min = $(".min")
+const max = $(".max")
+const lifes = $(".lifes-number")
+const playersAnswer = $(".players-answer")
 // End caption
-const endCaption =  document.querySelector(".win")
-
-
+const endCaption =  $(".win")
 
 class Validation {
     
@@ -14,16 +14,16 @@ class Validation {
     }
     checkInput() {
         if(this.arr[0] < 0 || this.arr[1] < 0 || this.arr[2] < 0) {
-            alert("Number cannot be negative")
+            alert("Liczba nie może być ujemna")
         } else if( this.arr.includes(NaN,undefined)) {
-            alert("Inputs cannot be empty or include special characters")
+            alert("Miejsca nie mogą byc puste ani zawierać znaków specialnych i liter")
         } else if (this.arr[0] === this.arr[1]) {
-            alert("Numbers are the same")
+            alert("Liczby są jednkowe")
             
         } else {
-            document.querySelector(".wrapper").classList.add("hidden") 
-            document.querySelector(".wrapper2").classList.remove("hidden") 
-            document.querySelector(".numerical-range").innerText = `${this.arr[0]} do ${this.arr[1]}`
+            $(".wrapper").classList.add("hidden") 
+            $(".wrapper2").classList.remove("hidden") 
+            $(".numerical-range").innerText = `${this.arr[0]} do ${this.arr[1]}`
         }
     }  
 }
@@ -35,9 +35,9 @@ class Hint  {
     }
     getTip() {
         if(this.playersAnswer < random) {
-            return "Given number is smaller than the drawn one"
+            return "Podana liczba jest mniejsza od wyslosowanej"
         } else {
-            return "Given number is greater than the drawn one"
+            return "Podana liczba jest większa od wylosowanej"
         }
     }
 }
@@ -47,8 +47,8 @@ class RestartGame {
         this.lifes = parseInt(lifes.value)
     } 
     playAgain() {
-        const check = document.querySelector(".check-button")
-        const play = document.querySelector(".play-again")
+        const check = $(".check-button")
+        const play = $(".play-again")
      
          check.classList.add("hidden")
          play.classList.remove("hidden")
@@ -60,23 +60,23 @@ class RestartGame {
              
              endCaption.innerText = ""
              confetti.stop()
-             document.querySelector(".wrapper").classList.remove("hidden") 
-             document.querySelector(".wrapper2").classList.add("hidden") 
+             $(".wrapper").classList.remove("hidden") 
+             $(".wrapper2").classList.add("hidden") 
         })
     } 
 
     gameOver() {
         if (this.lifes === 1 || this.lifes === 0) {
-            endCaption.innerText = ("Game Over :( Try again")
+            endCaption.innerText = ("Koniec gry :( spróbuj jeszcze raz")
             this.playAgain()
         } else {
             parseInt(lifes.value--)
             const tip = new Hint(playersAnswer)
             alert(
-                ` WRONG NUMBER
+                `NIE ZGADŁEŚ
                 
-                Lifes: ${parseInt(lifes.value)}
-                Tip: ${tip.getTip()}
+                Pozostało: ${parseInt(lifes.value)} trafień 
+                Podpowiedź: ${tip.getTip()}
                 `
             )
         }
@@ -92,7 +92,7 @@ class CheckAnswer extends RestartGame {
     checkPlayersAnswer() {
         if (this.playersAnswer === random) {
             confetti.start();
-            endCaption.innerText = "You won!"
+            endCaption.innerText = "Gratulacje wygrałeś!"
             super.playAgain()
         } else {
             super.gameOver()
@@ -103,7 +103,7 @@ class CheckAnswer extends RestartGame {
 class Buttons {
 
     startButton() {
-        document.querySelector(".start-button").addEventListener("click", () => {
+        $(".start-button").addEventListener("click", () => {
             const getInputValue = new Validation(min, max, lifes)
             
             getInputValue.checkInput()
@@ -112,7 +112,7 @@ class Buttons {
         })
     }
     checkButton() { 
-        document.querySelector(".check-button").addEventListener("click", () => {
+        $(".check-button").addEventListener("click", () => {
             const check = new CheckAnswer(lifes, playersAnswer)
 
             check.checkPlayersAnswer()
@@ -143,7 +143,6 @@ function getRandomNumber() {
 }
 
 const startGame = new GameInitiation()
-
 
 if (window.performance) {
    startGame.clear()
