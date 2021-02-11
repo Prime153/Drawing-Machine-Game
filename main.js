@@ -14,11 +14,11 @@ class Validation {
     }
     checkInput() {
         if(this.arr[0] < 0 || this.arr[1] < 0 || this.arr[2] < 0) {
-            alert("Liczba nie może być ujemna")
+            alert("Number cannot be negative")
         } else if( this.arr.includes(NaN,undefined)) {
-            alert("Miejsca nie mogą byc puste ani zawierać znaków specialnych i liter")
+            alert("Inputs cannot be empty or include special characters")
         } else if (this.arr[0] === this.arr[1]) {
-            alert("Liczby są jednkowe")
+            alert("Numbers are the same")
             
         } else {
             $(".wrapper").classList.add("hidden") 
@@ -35,9 +35,9 @@ class Hint  {
     }
     getTip() {
         if(this.playersAnswer < random) {
-            return "Podana liczba jest mniejsza od wyslosowanej"
+            return "Given number is smaller than the draw one"
         } else {
-            return "Podana liczba jest większa od wylosowanej"
+            return "Given number is greater than the draw one"
         }
     }
 }
@@ -67,16 +67,16 @@ class RestartGame {
 
     gameOver() {
         if (this.lifes === 1 || this.lifes === 0) {
-            endCaption.innerText = ("Koniec gry :( spróbuj jeszcze raz")
+            endCaption.innerText = ("Game Over :( Try again")
             this.playAgain()
         } else {
             parseInt(lifes.value--)
             const tip = new Hint(playersAnswer)
             alert(
-                `NIE ZGADŁEŚ
-                
-                Pozostało: ${parseInt(lifes.value)} trafień 
-                Podpowiedź: ${tip.getTip()}
+                `MISSED
+               
+                Life's left: ${parseInt(lifes.value)} 
+                Tip: ${tip.getTip()}
                 `
             )
         }
@@ -92,7 +92,7 @@ class CheckAnswer extends RestartGame {
     checkPlayersAnswer() {
         if (this.playersAnswer === random) {
             confetti.start();
-            endCaption.innerText = "Gratulacje wygrałeś!"
+            endCaption.innerText = "You have won!"
             super.playAgain()
         } else {
             super.gameOver()
